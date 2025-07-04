@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MOONBIX Music Festival</title>
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Material Icons CDN -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+
+    /* Root variables */
+    :root {
+      --purple-gradient: linear-gradient(90deg, #6c5dd3, #a86ee3);
+      --bg-dark: #0d133d;
+      --text-light: #eeeeee;
+      --btn-purple: #6c5dd3;
+      --btn-purple-hover: #826ee9;
+      --border-dark: rgba(255, 255, 255, 0.15);
+      --shadow-glow: 0 0 10px #7a66d1;
+    }
+
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(13, 19, 61, 0.85);
+      backdrop-filter: saturate(180%) blur(10px);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      box-shadow: 0 1px 6px rgb(0 0 0 / 0.4);
+    }
+
+    .navbar-nav .nav-link {
+      color: #999aad;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus {
+      color: var(--btn-purple);
+      outline: none;
+    }
+
+    .navbar-brand {
+      font-weight: 900;
+      font-size: 1.5rem;
+      background: var(--purple-gradient);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .btn-buy-tickets {
+      background: var(--purple-gradient);
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      padding: 0.5rem 1.4rem;
+      border-radius: 30px;
+      transition: background 0.35s ease;
+    }
+    .btn-buy-tickets:hover,
+    .btn-buy-tickets:focus {
+      background: var(--btn-purple-hover);
+      outline: none;
+      box-shadow: var(--shadow-glow);
+    }
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    .logo {
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: #8a7fff;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      user-select: none;
+    }
+    nav {
+      display: flex;
+      gap: 32px;
+    }
+    nav a {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #aaa;
+      position: relative;
+      padding: 8px 0;
+      transition: color 0.3s ease;
+    }
+    nav a:hover,
+    nav a:focus-visible {
+      color: #8a7fff;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 0;
+      background: #8a7fff;
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after,
+    nav a:focus-visible::after,
+    nav a[aria-current="page"]::after {
+      width: 100%;
+    }
+    main {
+      background: #141a38;
+      min-height: calc(100vh - 72px);
+      padding: 60px 15px 80px;
+      color: white;
+    }
+    h1 {
+      font-weight: 900;
+      font-size: 2.5rem;
+      letter-spacing: 0.06em;
+      color: #8a7fff;
+      text-align: center;
+      margin-bottom: 10px;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+    }
+    p.subtitle {
+      color: #bbb;
+      max-width: 680px;
+      margin: 0 auto 40px auto;
+      font-weight: 400;
+      font-size: 1.15rem;
+      text-align: center;
+      animation: fadeInUp 1s ease 0.3s forwards;
+      opacity: 0;
+    }
+    /* Countdown */
+    .countdown {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .countdown-item {
+      background: rgba(255 255 255 / 0.08);
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      padding: 1rem 1.4rem;
+      width: 90px;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    .countdown-item strong {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1;
+      color: #f3f3fa;
+      user-select: text;
+    }
+    .countdown-item span {
+      font-size: 0.85rem;
+      color: #b0b0c8;
+      user-select: text;
+    }
+
+    /* Buttons below countdown */
+    .hero-buttons {
+      margin-top: 3rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary-gradient {
+      background: var(--purple-gradient);
+      border: none;
+      border-radius: 30px;
+      color: #fff;
+      padding: 0.9rem 2.5rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+      user-select: none;
+    }
+    .btn-primary-gradient:hover,
+    .btn-primary-gradient:focus {
+      background: var(--btn-purple-hover);
+      box-shadow: var(--shadow-glow);
+      outline: none;
+    }
+
+    .btn-secondary-outline {
+      border: 1.8px solid rgba(255 255 255 / 0.3);
+      border-radius: 30px;
+      background: transparent;
+      color: #ccccee;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 0.9rem 2.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+    .btn-secondary-outline:hover,
+    .btn-secondary-outline:focus {
+      background-color: var(--purple-gradient);
+      border-color: var(--purple-gradient);
+      color: #fff;
+      outline: none;
+      box-shadow: var(--shadow-glow);
+    }
+    .countdown-item strong {
+      display: block;
+      font-size: 2rem;
+      line-height: 1;
+    }
+    .countdown-item span {
+      font-size: 0.8rem;
+      color: #bbb;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .schedule-tabs {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+    .schedule-tab-btn {
+      border: none;
+      padding: 10px 24px;
+      margin: 0 10px;
+      border-radius: 24px;
+      font-weight: 600;
+      cursor: pointer;
+      background: #222640;
+      color: #aaa;
+      font-size: 1rem;
+      transition: background 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+    .schedule-tab-btn.active {
+      background: #7d7fff;
+      color: white;
+      box-shadow: 0 6px 24px #857fffaa;
+    }
+    .schedule-list {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .schedule-list[hidden] {
+      display: none;
+    }
+    .schedule-item {
+      background: #222640;
+      border-radius: 14px;
+      padding: 18px 30px;
+      color: white;
+      font-weight: 600;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(125,127,255,0.3);
+    }
+    .schedule-time {
+      background: #615fed;
+      font-size: 0.85rem;
+      border-radius: 50px;
+      padding: 6px 18px;
+      color: white;
+      font-weight: 600;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(97,95,237,0.7);
+      user-select: none;
+    }
+    footer {
+      background: #131833;
+      color: #777ba0;
+      padding: 40px 15px;
+      text-align: center;
+      font-size: 0.875rem;
+      user-select: none;
+      border-top: 1px solid #222640;
+      margin-top: 40px;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @media (max-width: 767px) {
+      .container-md {
+        padding: 0 12px;
+      }
+      nav {
+        gap: 18px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      .countdown {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .countdown-item {
+        width: 60px;
+        padding: 10px 0;
+        font-size: 1rem;
+      }
+      .schedule-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .schedule-time {
+        margin-top: 8px;
+      }
+      .schedule-tab-btn {
+        margin: 6px 6px;
+        padding: 10px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md">
+      <div class="container-fluid px-3 px-md-5">
+        <a class="navbar-brand" href="#">MOONBIX</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="material-icons" style="font-size:32px;">menu</span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav align-items-center gap-3 gap-md-4">
+            <li class="nav-item">
+              <a class="nav-link" href="index.HTML">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="artis.html">Artists</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ticket.html">Tickets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="schedule.html">Schedule</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+            <li class="nav-item d-md-block d-none">
+              <button class="btn btn-buy-tickets" onclick="window.location.href='ticket.html'">Buy Tickets</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container-md" tabindex="0">
+    <h1>Event Schedule</h1>
+    <p class="subtitle">Plan your perfect festival experience</p>
+
+    <div class="countdown" aria-live="polite" aria-atomic="true" aria-relevant="removals additions" role="timer" aria-label="Ticket sale countdown">
+      <div class="countdown-item" aria-label="Days remaining">
+        <strong id="days">00</strong>
+        <span>Days</span>
+      </div>
+      <div class="countdown-item" aria-label="Hours remaining">
+        <strong id="hours">00</strong>
+        <span>Hours</span>
+      </div>
+      <div class="countdown-item" aria-label="Minutes remaining">
+        <strong id="minutes">00</strong>
+        <span>Minutes</span>
+      </div>
+      <div class="countdown-item" aria-label="Seconds remaining">
+        <strong id="seconds">00</strong>
+        <span>Seconds</span>
+      </div>
+    </div>
+
+    <div class="schedule-tabs" role="tablist" aria-label="Select day to view schedule">
+      <button class="schedule-tab-btn active" role="tab" aria-selected="true" aria-controls="day1" id="tab1">Day 1</button>
+      <button class="schedule-tab-btn" role="tab" aria-selected="false" aria-controls="day2" id="tab2">Day 2</button>
+      <button class="schedule-tab-btn" role="tab" aria-selected="false" aria-controls="day3" id="tab3">Day 3</button>
+    </div>
+
+    <section id="day1" class="schedule-list" role="tabpanel" aria-labelledby="tab1" tabindex="0">
+      <div class="schedule-item">
+        <div>
+          <strong>Luna Eclipse</strong><br />
+          <small>Main Stage</small>
+        </div>
+        <span class="schedule-time">8:00 PM - 9:30 PM</span>
+      </div>
+      <div class="schedule-item">
+        <div>
+          <strong>Cosmic Beats</strong><br />
+          <small>Electronic Stage</small>
+        </div>
+        <span class="schedule-time">6:30 PM - 7:45 PM</span>
+      </div>
+      <div class="schedule-item">
+        <div>
+          <strong>Stellar Groove</strong><br />
+          <small>Soul Stage</small>
+        </div>
+        <span class="schedule-time">5:00 PM - 6:15 PM</span>
+      </div>
+    </section>
+
+    <section id="day2" class="schedule-list" role="tabpanel" aria-labelledby="tab2" tabindex="0" hidden>
+      <div class="schedule-item">
+        <div>
+          <strong>Orbit Sounds</strong><br />
+          <small>Hip-Hop Innovator</small>
+        </div>
+        <span class="schedule-time">7:30 PM - 9:00 PM</span>
+      </div>
+      <div class="schedule-item">
+        <div>
+          <strong>Eclipse Harmony</strong><br />
+          <small>Folk Ensemble</small>
+        </div>
+        <span class="schedule-time">4:00 PM - 5:15 PM</span>
+      </div>
+      <div class="schedule-item">
+        <div>
+          <strong>Lunar Rhythms</strong><br />
+          <small>World Music Fusion</small>
+        </div>
+        <span class="schedule-time">3:00 PM - 4:15 PM</span>
+      </div>
+    </section>
+
+    <section id="day3" class="schedule-list" role="tabpanel" aria-labelledby="tab3" tabindex="0" hidden>
+      <div class="schedule-item">
+        <div>
+          <strong>Nebula Nights</strong><br />
+          <small>Rock Stage</small>
+        </div>
+        <span class="schedule-time">3:30 PM - 4:45 PM</span>
+      </div>
+      <div class="schedule-item">
+        <div>
+          <strong>Twilight DJs</strong><br />
+          <small>Dance Tent</small>
+        </div>
+        <span class="schedule-time">6:00 PM - 7:30 PM</span>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    &copy; 2025 Moonbix Festival. All rights reserved.
+  </footer>
+
+  <script>
+    // Tab navigation for schedule
+    const tabs = document.querySelectorAll(".schedule-tab-btn");
+    const panels = document.querySelectorAll(".schedule-list");
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(t => {
+          t.classList.remove("active");
+          t.setAttribute("aria-selected", "false");
+        });
+        panels.forEach(p => p.setAttribute("hidden", ""));
+        tab.classList.add("active");
+        tab.setAttribute("aria-selected", "true");
+        document.getElementById(tab.getAttribute("aria-controls")).removeAttribute("hidden");
+      });
+    });
+
+    // Countdown timer for ticket sales
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    // Set your ticket sale deadline here (YYYY-MM-DDTHH:MM:SS)
+    const ticketSaleDeadline = new Date();
+    ticketSaleDeadline.setDate(ticketSaleDeadline.getDate() + 10); // 10 days from now
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = ticketSaleDeadline - now;
+
+      if(diff <= 0) {
+        daysEl.textContent = "00";
+        hoursEl.textContent = "00";
+        minutesEl.textContent = "00";
+        secondsEl.textContent = "00";
+        clearInterval(timerInterval);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      daysEl.textContent = days.toString().padStart(2, "0");
+      hoursEl.textContent = hours.toString().padStart(2, "0");
+      minutesEl.textContent = minutes.toString().padStart(2, "0");
+      secondsEl.textContent = seconds.toString().padStart(2, "0");
+    }
+
+    updateCountdown();
+    const timerInterval = setInterval(updateCountdown, 1000);
+
+  </script>
+</body>
+</html>

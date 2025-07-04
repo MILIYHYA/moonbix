@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MOONBIX Music Festival</title>
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Material Icons CDN -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+
+    /* Root variables */
+    :root {
+      --purple-gradient: linear-gradient(90deg, #6c5dd3, #a86ee3);
+      --bg-dark: #0d133d;
+      --text-light: #eeeeee;
+      --btn-purple: #6c5dd3;
+      --btn-purple-hover: #826ee9;
+      --border-dark: rgba(255, 255, 255, 0.15);
+      --shadow-glow: 0 0 10px #7a66d1;
+    }
+
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(13, 19, 61, 0.85);
+      backdrop-filter: saturate(180%) blur(10px);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      box-shadow: 0 1px 6px rgb(0 0 0 / 0.4);
+    }
+
+    .navbar-nav .nav-link {
+      color: #999aad;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus {
+      color: var(--btn-purple);
+      outline: none;
+    }
+
+    .navbar-brand {
+      font-weight: 900;
+      font-size: 1.5rem;
+      background: var(--purple-gradient);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .btn-buy-tickets {
+      background: var(--purple-gradient);
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      padding: 0.5rem 1.4rem;
+      border-radius: 30px;
+      transition: background 0.35s ease;
+    }
+    .btn-buy-tickets:hover,
+    .btn-buy-tickets:focus {
+      background: var(--btn-purple-hover);
+      outline: none;
+      box-shadow: var(--shadow-glow);
+    }
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #8b5cf6;
+            letter-spacing: 1px;
+            user-select: none;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        nav a.nav-link {
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 1rem;
+        }
+        nav a.nav-link.active,
+        nav a.nav-link:hover {
+            color: #8b5cf6;
+        }
+        .btn-buy {
+            background: linear-gradient(90deg, #7c3aed, #6470e6);
+            border: none;
+            border-radius: 24px;
+            padding: 0.5rem 1.5rem;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.4s ease;
+            cursor: pointer;
+        }
+        .btn-buy:hover,
+        .btn-buy:focus {
+            background: linear-gradient(90deg, #6470e6, #7c3aed);
+            outline: none;
+        }
+
+        /* Hamburger menu */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #cbd5e1;
+            font-size: 2rem;
+        }
+        .hamburger:focus {
+            outline-offset: 3px;
+        }
+
+        /* Mobile nav menu */
+        .mobile-nav {
+            display: none;
+            flex-direction: column;
+            background-color: #0c1127;
+            position: absolute;
+            top: 72px;
+            right: 0;
+            width: 100%;
+            max-width: 280px;
+            box-shadow: -4px 4px 30px rgba(139, 92, 246, 0.5);
+            border-radius: 0 0 8px 8px;
+            z-index: 1100;
+        }
+        .mobile-nav a {
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #1e293b;
+            font-weight: 600;
+            color: #cbd5e1;
+        }
+        .mobile-nav a:hover, .mobile-nav a:focus {
+            background: #1e293b;
+            color: #a78bfa;
+            outline: none;
+        }
+
+        /* MAIN CONTACT SECTION */
+        main {
+            flex-grow: 1;
+            padding: 2rem 1.5rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) {
+            main {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+            }
+        }
+
+        /* Cards */
+        .card {
+            background: #17203a;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgb(139 92 246 / 0.35);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Form title */
+        h2.card-title {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            user-select: none;
+        }
+
+        /* Form elements with uniform styling */
+        label {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            user-select: none;
+        }
+        input[type="text"], input[type="email"], textarea {
+            background: #1e293b;
+            border: none;
+            border-radius: 8px;
+            color: #e0e7ff;
+            padding: 0.75rem 1rem;
+            width: 100%;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            resize: vertical;
+            transition: box-shadow 0.25s ease, background-color 0.25s ease;
+            box-shadow: inset 0 0 6px rgb(0 0 0 / 0.6);
+        }
+        input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+            outline: none;
+            background: #28335c;
+            box-shadow: 0 0 12px 2px #8b5cf6;
+        }
+
+        textarea {
+            min-height: 120px;
+        }
+
+        /* Submit button with gradient */
+        .btn-submit {
+            margin-top: 1.75rem;
+            background: linear-gradient(90deg, #7c3aed, #6470e6);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 0.75rem 0;
+            cursor: pointer;
+            transition: background 0.4s ease, transform 0.3s ease;
+            user-select: none;
+            box-shadow: 0 5px 12px rgb(139 92 246 / 0.5);
+            text-align: center;
+            width: 100%;
+        }
+        .btn-submit:hover,
+        .btn-submit:focus {
+            background: linear-gradient(90deg, #6470e6, #7c3aed);
+            transform: translateY(-2px);
+            outline: none;
+            box-shadow: 0 8px 18px rgb(139 92 246 / 0.75);
+        }
+
+        /* Footer of form text */
+        .form-footer {
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: #475569;
+            user-select: none;
+            text-align: center;
+        }
+
+        /* Festival info */
+        .festival-info .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .festival-info .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .info-icon {
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #2c387e;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.4rem;
+            box-shadow: 0 3px 10px rgb(139 92 246 / 0.8);
+            user-select: none;
+            transition: background 0.3s ease;
+        }
+
+        .info-text strong {
+            color: white;
+            font-weight: 700;
+            user-select: none;
+        }
+        .info-text {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            user-select: none;
+            word-break: break-word;
+        }
+
+        /* Follow Us social icons */
+        .social-icons {
+            margin-top: 3rem;
+            display: flex;
+            gap: 1.25rem;
+            padding-left: 1rem;
+        }
+        .social-icons a {
+            background: #2c387e;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.1rem;
+            transition: background 0.3s ease, transform 0.3s ease;
+            user-select: none;
+            box-shadow: 0 3px 10px rgb(139 92 246 / 0.8);
+        }
+        .social-icons a:hover,
+        .social-icons a:focus {
+            background: #6470e6;
+            color: white;
+            transform: scale(1.1);
+            outline: none;
+            box-shadow: 0 6px 20px rgb(139 92 246 / 1);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-md">
+      <div class="container-fluid px-3 px-md-5">
+        <a class="navbar-brand" href="#">MOONBIX</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="material-icons" style="font-size:32px;">menu</span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav align-items-center gap-3 gap-md-4">
+            <li class="nav-item">
+              <a class="nav-link" href="index.HTML">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="artis.html">Artists</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ticket.html">Tickets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="schedule.html">Schedule</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+            <li class="nav-item d-md-block d-none">
+              <button class="btn btn-buy-tickets" onclick="window.location.href='ticket.html'">Buy Tickets</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+<nav id="mobile-menu" class="mobile-nav" aria-label="Mobile navigation">
+    <a href="#" tabindex="0">Home</a>
+    <a href="#" tabindex="0">Artists</a>
+    <a href="#" tabindex="0">Tickets</a>
+    <a href="#" tabindex="0">Schedule</a>
+    <a href="#" tabindex="0">Contact</a>
+</nav>
+
+<main>
+    <section class="card fade-in-up" aria-labelledby="contact-form-title">
+        <h2 class="card-title" id="contact-form-title">Send us a message</h2>
+        <form id="contact-form" aria-describedby="form-footer-text" novalidate>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    placeholder="Your name"
+                    autocomplete="name"
+                    required
+                    aria-required="true"
+                />
+                <div class="invalid-feedback">Please enter your name.</div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="Your email"
+                    autocomplete="email"
+                    required
+                    aria-required="true"
+                />
+                <div class="invalid-feedback">Please enter a valid email.</div>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea
+                    class="form-control"
+                    id="message"
+                    placeholder="Your message"
+                    required
+                    aria-required="true"
+                ></textarea>
+                <div class="invalid-feedback">Please enter a message.</div>
+            </div>
+            <button type="submit" class="btn-submit" aria-label="Send Message">
+                Send Message
+            </button>
+            <p class="form-footer" id="form-footer-text">This is a demo contact form</p>
+        </form>
+    </section>
+
+    <section class="card festival-info" aria-labelledby="festival-info-title">
+        <h2 class="card-title" id="festival-info-title">Festival Information</h2>
+        <div class="info-list">
+            <div class="info-item">
+                <span class="info-icon" aria-hidden="true"><span class="material-icons">location_on</span></span>
+                <div class="info-text"><strong>Location</strong><br />Moonbix Arena, Stardust Valley</div>
+            </div>
+            <div class="info-item">
+                <span class="info-icon" aria-hidden="true"><span class="material-icons">local_phone</span></span>
+                <div class="info-text"><strong>Phone</strong><br />+1 (555) 123–4567</div>
+            </div>
+            <div class="info-item">
+                <span class="info-icon" aria-hidden="true"><span class="material-icons">mail_outline</span></span>
+                <div class="info-text"><strong>Email</strong><br />info@moonbixfestival.com</div>
+            </div>
+        </div>
+
+        <div class="social-icons" aria-label="Follow us on social media">
+            <a href="#" role="listitem" aria-label="Twitter">
+            <svg width="20" height="20" fill="currentColor" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M8 19c7.732 0 11.96-6.415 11.96-11.96 0-.182 0-.364-.012-.544A8.555 8.555 0 0 0 22 4.41a8.204 8.204 0 0 1-2.357.646 4.131 4.131 0 0 0 1.81-2.28 8.224 8.224 0 0 1-2.606.996 4.104 4.104 0 0 0-7.005 3.743 11.64 11.64 0 0 1-8.457-4.287 4.108 4.108 0 0 0 1.27 5.481A4.077 4.077 0 0 1 3 8.473v.051a4.11 4.11 0 0 0 3.292 4.022 4.1 4.1 0 0 1-1.85.07 4.107 4.107 0 0 0 3.831 2.85A8.233 8.233 0 0 1 2 17.538a11.616 11.616 0 0 0 6.29 1.84"></path></svg>
+          </a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+    </section>
+</main>
+
+<!-- Bootstrap JS (with Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Toggle mobile menu
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+        const expanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
+        hamburger.setAttribute('aria-expanded', !expanded);
+        mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Form validation using Bootstrap's validation classes
+    (function () {
+        'use strict';
+        const form = document.getElementById('contact-form');
+        form.addEventListener(
+            'submit',
+            function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                } else {
+                    event.preventDefault();
+                    alert('Message sent (demo only)');
+                    form.reset();
+                }
+                form.classList.add('was-validated');
+            },
+            false
+        );
+    })();
+</script>
+</body>
+</html>
+

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MOONBIX Music Festival</title>
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Material Icons CDN -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+
+    /* Root variables */
+    :root {
+      --purple-gradient: linear-gradient(90deg, #6c5dd3, #a86ee3);
+      --bg-dark: #0d133d;
+      --text-light: #eeeeee;
+      --btn-purple: #6c5dd3;
+      --btn-purple-hover: #826ee9;
+      --border-dark: rgba(255, 255, 255, 0.15);
+      --shadow-glow: 0 0 10px #7a66d1;
+    }
+
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(13, 19, 61, 0.85);
+      backdrop-filter: saturate(180%) blur(10px);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      box-shadow: 0 1px 6px rgb(0 0 0 / 0.4);
+    }
+
+    .navbar-nav .nav-link {
+      color: #999aad;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus {
+      color: var(--btn-purple);
+      outline: none;
+    }
+
+    .navbar-brand {
+      font-weight: 900;
+      font-size: 1.5rem;
+      background: var(--purple-gradient);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .btn-buy-tickets {
+      background: var(--purple-gradient);
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      padding: 0.5rem 1.4rem;
+      border-radius: 30px;
+      transition: background 0.35s ease;
+    }
+    .btn-buy-tickets:hover,
+    .btn-buy-tickets:focus {
+      background: var(--btn-purple-hover);
+      outline: none;
+      box-shadow: var(--shadow-glow);
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: #8a7fff;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 32px;
+    }
+    nav a {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #aaa;
+      position: relative;
+      padding: 8px 0;
+      transition: color 0.3s ease;
+    }
+    nav a:hover,
+    nav a:focus-visible {
+      color: #8a7fff;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 0;
+      background: #8a7fff;
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after,
+    nav a:focus-visible::after,
+    nav a[aria-current="page"]::after {
+      width: 100%;
+    }
+
+    main {
+      padding: 60px 15px 80px;
+      background: #141a38;
+      min-height: calc(100vh - 72px);
+      color: white;
+    }
+
+    h1 {
+      font-weight: 900;
+      font-size: 2.5rem;
+      letter-spacing: 0.06em;
+      color: #8a7fff;
+      text-align: center;
+      margin-bottom: 10px;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+    }
+
+    p.subtitle {
+      color: #bbb;
+      max-width: 680px;
+      margin: 0 auto 40px auto;
+      font-weight: 400;
+      font-size: 1.15rem;
+      text-align: center;
+      animation: fadeInUp 1s ease 0.3s forwards;
+      opacity: 0;
+    }
+
+    .artist-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      max-width: 1140px;
+      margin: 0 auto;
+      animation: fadeInUp 1s ease 0.6s forwards;
+      opacity: 0;
+    }
+
+    .artist-card {
+      background: #222640;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      height: auto;
+      box-shadow: 0 5px 15px rgba(138,127,255,0.4);
+      cursor: default;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      color: #ddd;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .artist-card:focus-visible,
+    .artist-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 14px 30px rgba(138,127,255,0.7);
+      outline: none;
+      z-index: 1;
+    }
+    .artist-img {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.75);
+      border-radius: 14px;
+      transition: filter 0.3s ease;
+      margin-bottom: 16px;
+    }
+    .artist-card:hover .artist-img {
+      filter: brightness(0.5);
+    }
+    .artist-info {
+      position: relative;
+      z-index: 1;
+      flex-grow: 1;
+    }
+    .artist-name {
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      color: #fff;
+      text-shadow: 0 0 8px rgba(138,127,255,0.9);
+    }
+    .artist-genre {
+      color: #888bbd;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+    .artist-description {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: #777ba0;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+    footer {
+      background: #131833;
+      color: #777ba0;
+      padding: 40px 15px;
+      text-align: center;
+      font-size: 0.875rem;
+      user-select: none;
+      border-top: 1px solid #222640;
+      margin-top: 40px;
+    }
+    .btn-profile {
+      background: linear-gradient(135deg, #7d7fff, #9a7fff);
+      border: none;
+      color: white;
+      font-weight: 600;
+      padding: 10px 0;
+      border-radius: 24px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      width: 100%;
+      user-select: none;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+    .btn-profile:hover, .btn-profile:focus-visible {
+      background: linear-gradient(135deg, #a49fff, #b79fff);
+      outline: none;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .container-md {
+        padding: 0 12px;
+      }
+      nav {
+        gap: 18px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      .artist-cards {
+        grid-template-columns: 1fr;
+      }
+      .artist-card {
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md">
+      <div class="container-fluid px-3 px-md-5">
+        <a class="navbar-brand" href="#">MOONBIX</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="material-icons" style="font-size:32px;">menu</span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav align-items-center gap-3 gap-md-4">
+            <li class="nav-item">
+              <a class="nav-link" href="index.HTML">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="artis.html">Artists</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ticket.html">Tickets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="schedule.html">Schedule</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+            <li class="nav-item d-md-block d-none">
+              <button class="btn btn-buy-tickets" onclick="window.location.href='ticket.html'">Buy Tickets</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container-md" tabindex="0">
+    <h1>Trending Artists</h1>
+    <p class="subtitle">Discover the hottest rising stars lighting up the music scene right now.</p>
+    <div class="artist-cards" role="list">
+      <article class="artist-card" role="listitem" tabindex="0" aria-describedby="desc-billie">
+        <div class="artist-img" style="background-image: url('billie2.jpg');" role="img" aria-label="Portrait of Billie Eilish, Pop sensation"></div>
+        <div class="artist-info">
+          <h2 class="artist-name">Billie Eilish</h2>
+          <p class="artist-genre">Pop / Alternative</p>
+          <p id="desc-billie" class="artist-description">Grammy-winning artist known for her unique voice and genre-bending sound.</p>
+          <button class="btn btn-profile" onclick="window.location.href='bilienganjuk.html'" aria-label="View profile of Billie Eilish">View Profile</button>
+        </div>
+      </article>
+
+      <article class="artist-card" role="listitem" tabindex="0" aria-describedby="desc-dua">
+        <div class="artist-img" style="background-image: url('centralcee2.jpg');" role="img" aria-label="Portrait of Dua Lipa, Dance-pop star"></div>
+        <div class="artist-info">
+          <h2 class="artist-name">Central Cee</h2>
+          <p class="artist-genre">HipHop / UK Rap</p>
+          <p id="desc-dua" class="artist-description">British rapper known for his musical style which combines hip-hop, trap and UK drill.</p>
+          <button class="btn btn-profile" onclick="window.location.href='centralcee.html'" aria-label="View profile of Dua Lipa">View Profile</button>
+        </div>
+      </article>
+
+      <article class="artist-card" role="listitem" tabindex="0" aria-describedby="desc-olivia">
+        <div class="artist-img" style="background-image: url('sza2.jpg');" role="img" aria-label="Portrait of SZA, R&b artist"></div>
+        <div class="artist-info">
+          <h2 class="artist-name">SZA</h2>
+          <p class="artist-genre">R&b / Neo-Soul</p>
+          <p id="desc-sza" class="artist-description">SZA is an American singer and known for her soulful voice and, introspective lyrics</p>
+          <button class="btn-profile" onclick="location.href='sza.html'" aria-label="View profile of SZA">View Profile</button>
+        </div>
+      </article>
+
+      <article class="artist-card" role="listitem" tabindex="0" aria-describedby="desc-brad">
+        <div class="artist-img" style="background-image: url('kendrick.jpg');" role="img" aria-label="Portrait of Kendrick Lamar, hip-hop artist"></div>
+        <div class="artist-info">
+          <h2 class="artist-name">Kendrick Lamar</h2>
+          <p class="artist-genre">Hip-Hop / Rap</p>
+          <p id="desc-brad" class="artist-description">Kendrick Lamar is an award-winning rapper, known for his sharp lyricism.</p>
+          <button class="btn-profile" onclick="location.href='kedrick.html'" aria-label="View profile of Kendrick Lamar">View Profile</button>
+        </div>
+      </article>
+
+      <article class="artist-card" role="listitem" tabindex="0" aria-describedby="desc-ariana">
+        <div class="artist-img" style="background-image: url('jb2.jpg');" role="img" aria-label="Portrait of Justin Bieber, R&B vocalist"></div>
+        <div class="artist-info">
+          <h2 class="artist-name">Justin Bieber</h2>
+          <p class="artist-genre">R&B / Pop</p>
+          <p id="desc-justin" class="artist-description">Justin Bieber is a pop icon known for evolving from teen star to a versatile artist,</p>
+          <button class="btn-profile" onclick="location.href='jb.html'" aria-label="View profile of Justin Bieber">View Profile</button>
+        </div>
+      </article>
+
+       <article class="artist-card" role="listitem" tabindex="0" aria-describedby="desc-brad">
+        <div class="artist-img" style="background-image: url('taylor2.jpg');" role="img" aria-label="Portrait of Brayden Smith, hip-hop artist"></div>
+        <div class="artist-info">
+          <h2 class="artist-name">Taylor Swift</h2>
+          <p class="artist-genre">Pop / Alternative</p>
+          <p id="desc-brad" class="artist-description">Taylor Swift, a worldwide famous singer, is known for her narrative lyrics.</p>
+          <button class="btn-profile" onclick="location.href='taylorswift.html'" aria-label="View profile of Taylor Swift">View Profile</button>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+
+  <footer role="contentinfo">
+    &copy; 2025 Moonbix Festival. All rights reserved.
+  </footer>
+
+  <script>
+    // Accessibility: keyboard navigation for nav links and profile buttons
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('keydown', e => {
+        if(e.key === 'Enter' || e.key === ' ') link.click();
+      });
+    });
+    const profileButtons = document.querySelectorAll('.btn-profile');
+    profileButtons.forEach(btn => {
+      btn.addEventListener('keydown', e => {
+        if(e.key === 'Enter' || e.key === ' ') btn.click();
+      });
+    });
+  </script>
+</body>
+</html>

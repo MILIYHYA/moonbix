@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MOONBIX - VIP Ticket</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d133d;
+      --card: #121844;
+      --highlight: #a78bfa;
+      --text: #e0e0e0;
+      --muted: #9ca3af;
+      --gradient: linear-gradient(135deg, #7b6aff, #867ff1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .wrapper {
+      max-width: 1200px;
+      width: 100%;
+      padding: 2rem 1rem;
+    }
+
+    h1.title {
+      font-size: 3rem;
+      font-weight: 900;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    p.subtitle {
+      color: #b0b5f2;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      font-weight: 400;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .ticket-card,
+    .form-column {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow:
+        0 0 20px #4a48b080,
+        inset 0 0 15px #3a39b7;
+      width: 320px;
+    }
+
+    .ticket-card .label {
+      background: #c2baffdd;
+      color: #3a208d;
+      padding: 0.3rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      display: inline-block;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 8px #c2baffcc;
+      text-transform: uppercase;
+    }
+
+    .ticket-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #d0c9f6;
+      margin-bottom: 0.3rem;
+    }
+
+    .ticket-subtitle {
+      color: #a29fca;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .ticket-price {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #a78bfa;
+      margin-bottom: 1.6rem;
+    }
+
+    .features-list {
+      list-style: none;
+      padding: 0;
+      color: #b3a9f6cc;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .features-list li {
+      margin: 0.6rem 0;
+    }
+
+    .form-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group label {
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+      color: #aaa;
+    }
+
+    .form-group input,
+    .form-group select {
+      padding: 0.75rem;
+      border-radius: 12px;
+      border: none;
+      background: #191f5a;
+      color: #fff;
+      font-size: 1rem;
+      box-shadow: inset 0 0 8px #322b9c99;
+      transition: outline 0.25s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: 2px solid #a78bfa;
+    }
+
+    .btn {
+      background: var(--gradient);
+      border: none;
+      padding: 0.75rem;
+      color: white;
+      font-weight: 600;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 6px 14px #7b6affbb;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .btn:hover,
+    .btn:focus {
+      background: linear-gradient(135deg, #9d8afc, #bda6ff);
+      color: #0e123d;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 18px #bda6ffcc;
+      outline: none;
+    }
+
+    footer {
+      background: #131833;
+      color: #777ba0;
+      padding: 40px 15px;
+      text-align: center;
+      font-size: 0.875rem;
+      user-select: none;
+      border-top: 1px solid #222640;
+      margin-top: 40px;
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      h1.title {
+        font-size: 2.2rem;
+      }
+
+      .ticket-card,
+      .form-column {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .container {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h1 class="title">MOONBIX</h1>
+    <p class="subtitle">GET YOUR TICKET NOW</p>
+    <div class="container">
+
+      
+      <!-- Ticket Card -->
+      <div class="ticket-card">
+        <div class="ticket-title">Platinum</div>
+        <div class="ticket-subtitle">Ultimate Experience</div>
+        <div class="ticket-price">$199</div>
+        <ul class="features-list">
+          <li>All Standard features</li>
+          <li>VIP viewing areas</li>
+          <li>Exclusive lounge access</li>
+          <li>Complimentary drinks</li>
+        </ul>
+      </div>
+
+      <!-- Form Column -->
+      <div class="form-column">
+        <form class="form-wrapper">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="Enter your full name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter your email address" required>
+          </div>
+          <div class="form-group">
+            <label for="payment">Payment Method</label>
+            <select id="payment" required>
+              <option value="" disabled selected>Select payment method</option>
+              <option value="qris">QRIS</option>
+            </select>
+          </div>
+          <button class="btn btn-buy-tickets" onclick="window.location.href='pembayaran.html'">Buy Tickets</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Moonbix Festival. All rights reserved.
+  </footer>
+</body>
+</html>

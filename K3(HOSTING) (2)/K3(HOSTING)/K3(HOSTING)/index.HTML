@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MOONBIX Music Festival</title>
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Material Icons CDN -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+
+    /* Root variables */
+    :root {
+      --purple-gradient: linear-gradient(90deg, #6c5dd3, #a86ee3);
+      --bg-dark: #0d133d;
+      --text-light: #eeeeee;
+      --btn-purple: #6c5dd3;
+      --btn-purple-hover: #826ee9;
+      --border-dark: rgba(255, 255, 255, 0.15);
+      --shadow-glow: 0 0 10px #7a66d1;
+    }
+
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(13, 19, 61, 0.85);
+      backdrop-filter: saturate(180%) blur(10px);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      box-shadow: 0 1px 6px rgb(0 0 0 / 0.4);
+    }
+
+    .navbar-nav .nav-link {
+      color: #999aad;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus {
+      color: var(--btn-purple);
+      outline: none;
+    }
+
+    .navbar-brand {
+      font-weight: 900;
+      font-size: 1.5rem;
+      background: var(--purple-gradient);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .btn-buy-tickets {
+      background: var(--purple-gradient);
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      padding: 0.5rem 1.4rem;
+      border-radius: 30px;
+      transition: background 0.35s ease;
+    }
+    .btn-buy-tickets:hover,
+    .btn-buy-tickets:focus {
+      background: var(--btn-purple-hover);
+      outline: none;
+      box-shadow: var(--shadow-glow);
+    }
+
+    /* Hero section */
+    main {
+      padding: 4rem 2rem 6rem 2rem;
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.5rem;
+      user-select: none;
+    }
+
+    main h1 {
+      font-weight: 900;
+      font-size: clamp(2rem, 7vw, 4.5rem);
+      margin-bottom: 0;
+      line-height: 1.1;
+    }
+    main h1 .moonbix {
+      background: var(--purple-gradient);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+    main h2 {
+      font-weight: 700;
+      font-size: clamp(1.6rem, 5vw, 3rem);
+      margin-bottom: 0;
+      line-height: 1.1;
+    }
+
+    main p.subtitle {
+      color: #b0b0c8;
+      font-weight: 400;
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      margin-top: 12px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      user-select: text;
+    }
+
+    /* Countdown */
+    .countdown {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .countdown-item {
+      background: rgba(255 255 255 / 0.08);
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      padding: 1rem 1.4rem;
+      width: 90px;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    .countdown-item strong {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1;
+      color: #f3f3fa;
+      user-select: text;
+    }
+    .countdown-item span {
+      font-size: 0.85rem;
+      color: #b0b0c8;
+      user-select: text;
+    }
+
+    /* Buttons below countdown */
+    .hero-buttons {
+      margin-top: 3rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary-gradient {
+      background: var(--purple-gradient);
+      border: none;
+      border-radius: 30px;
+      color: #fff;
+      padding: 0.9rem 2.5rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+      user-select: none;
+    }
+    .btn-primary-gradient:hover,
+    .btn-primary-gradient:focus {
+      background: var(--btn-purple-hover);
+      box-shadow: var(--shadow-glow);
+      outline: none;
+    }
+
+    .btn-secondary-outline {
+      border: 1.8px solid rgba(255 255 255 / 0.3);
+      border-radius: 30px;
+      background: transparent;
+      color: #ccccee;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 0.9rem 2.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+    .btn-secondary-outline:hover,
+    .btn-secondary-outline:focus {
+      background-color: var(--purple-gradient);
+      border-color: var(--purple-gradient);
+      color: #fff;
+      outline: none;
+      box-shadow: var(--shadow-glow);
+    }
+
+    /* Arrow down icon below buttons */
+    .arrow-down {
+      margin-top: 4rem;
+      font-size: 3rem;
+      color: #6c5dd3;
+      animation: bounce 2s infinite;
+      user-select: none;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-15%);
+      }
+      60% {
+        transform: translateY(-7%);
+      }
+    }
+
+    /* Star background animation */
+    .stars {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+      background: var(--bg-dark);
+    }
+
+    /* small stars */
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 8px 2px white;
+      opacity: 0.8;
+      animation: twinkle 3s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0% {
+        opacity: 0.2;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0.8;
+        transform: scale(1.3);
+      }
+    }
+    /* Responsive adjustments */
+    @media (max-width: 767px) {
+      header {
+        padding: 1rem 1rem;
+      }
+      main {
+        padding: 3rem 1rem 5rem 1rem;
+      }
+      .countdown {
+        justify-content: center;
+        gap: 0.8rem;
+      }
+      .countdown-item {
+        width: 70px;
+        padding: 0.8rem 1rem;
+      }
+      .hero-buttons {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .btn-primary-gradient,
+      .btn-secondary-outline {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.1rem;
+      }
+      /* Navbar toggler bigger & visible */
+      .navbar-toggler {
+        border: none;
+        color: var(--text-light);
+      }
+      .navbar-nav {
+        background: rgba(13, 19, 61, 0.95);
+        backdrop-filter: saturate(180%) blur(10px);
+      }
+      .moon-container {
+        width: 70px;
+        height: 70px;
+        top: 1.5rem;
+        right: 1rem;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Starry background -->
+  <div class="stars" aria-hidden="true"></div>
+
+  <header>
+    <nav class="navbar navbar-expand-md">
+      <div class="container-fluid px-3 px-md-5">
+        <a class="navbar-brand" href="#">MOONBIX</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="material-icons" style="font-size:32px;">menu</span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav align-items-center gap-3 gap-md-4">
+            <li class="nav-item">
+              <a class="nav-link" href="index.HTML">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="artis.html">Artists</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ticket.html">Tickets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="schedule.html">Schedule</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+            <li class="nav-item d-md-block d-none">
+              <button class="btn btn-buy-tickets" onclick="window.location.href='ticket.html'">Buy Tickets</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main role="main" aria-label="Main content">
+    <h1><span class="moonbix">MOONBIX</span></h1>
+    <h2>Music Festival</h2>
+    <p class="subtitle">Experience the magic under the moonlight with the most incredible artists of our time</p>
+
+    <section class="countdown" aria-label="Countdown timer to event start">
+      <div class="countdown-item" aria-live="polite">
+        <strong id="days">00</strong>
+        <span>Days</span>
+      </div>
+      <div class="countdown-item" aria-live="polite">
+        <strong id="hours">00</strong>
+        <span>Hours</span>
+      </div>
+      <div class="countdown-item" aria-live="polite">
+        <strong id="minutes">00</strong>
+        <span>Minutes</span>
+      </div>
+      <div class="countdown-item" aria-live="polite">
+        <strong id="seconds">00</strong>
+        <span>Seconds</span>
+      </div>
+    </section>
+
+    <section class="hero-buttons">
+      <button onclick="window.location.href='ticket.html'" class="btn-primary-gradient" type="button">Get Your Tickets</button>
+    </section>
+
+    <div class="arrow-down" aria-hidden="true" title="Scroll down">
+      <span class="material-icons">keyboard_double_arrow_down</span>
+    </div>
+  </main>
+
+  <!-- Bootstrap 5 JS Bundle CDN (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Star generator for starry background with random positions and sizes
+    const starsContainer = document.querySelector('.stars');
+    const starCount = 120;
+
+    for (let i = 0; i < starCount; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      const size = Math.random() * 2 + 0.5;
+      star.style.width = `${size}px`;
+      star.style.height = `${size}px`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.animationDuration = `${(Math.random() * 2 + 1)}s`;
+      star.style.animationDelay = `${Math.random() * 3}s`;
+      starsContainer.appendChild(star);
+    }
+
+    // Countdown Timer
+    const countdownDate = new Date();
+    // Set countdown 30 days from now
+    countdownDate.setDate(countdownDate.getDate() + 10);
+
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = countdownDate.getTime() - now;
+
+      if (distance < 0) {
+        daysEl.textContent = '00';
+        hoursEl.textContent = '00';
+        minutesEl.textContent = '00';
+        secondsEl.textContent = '00';
+        clearInterval(countdownInterval);
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      daysEl.textContent = days.toString().padStart(2, '0');
+      hoursEl.textContent = hours.toString().padStart(2, '0');
+      minutesEl.textContent = minutes.toString().padStart(2, '0');
+      secondsEl.textContent = seconds.toString().padStart(2, '0');
+    }
+
+    updateCountdown();
+    const countdownInterval = setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
+

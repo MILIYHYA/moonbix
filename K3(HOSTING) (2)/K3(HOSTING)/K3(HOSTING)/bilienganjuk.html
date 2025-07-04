@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Moonbix - Billie Eilish Profile</title>
+  <!-- Google Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body, html {
+      margin: 0; padding: 0; min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background-color: #131833;
+      color: #bbb;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    a:focus-visible {
+      outline: 3px solid #8a7fff;
+      outline-offset: 3px;
+    }
+    .container-md {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 15px 80px;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(19,24,51,0.95);
+      border-bottom: 1px solid #222640;
+      z-index: 1050;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      animation: slideDown 0.5s ease forwards;
+    }
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    .logo {
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: #8a7fff;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      user-select: none;
+    }
+    nav {
+      display: flex;
+      gap: 32px;
+    }
+    nav a {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #aaa;
+      position: relative;
+      padding: 8px 0;
+      transition: color 0.3s ease;
+    }
+    nav a:hover,
+    nav a:focus-visible {
+      color: #8a7fff;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 0;
+      background: #8a7fff;
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after,
+    nav a:focus-visible::after {
+      width: 100%;
+    }
+    .profile-img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 8px 20px rgba(138,127,255,0.6);
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-weight: 900;
+      font-size: 2.8rem;
+      color: #8a7fff;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    h2 {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #bbb;
+      margin-bottom: 16px;
+      text-align: center;
+      font-style: italic;
+    }
+    p.bio {
+      font-weight: 400;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #ddd;
+      margin-bottom: 24px;
+      text-align: justify;
+    }
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      background: #222640;
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #8a7fff;
+      box-shadow: 0 4px 12px rgba(125,127,255,0.5);
+      user-select: none;
+      min-width: 110px;
+      text-align: center;
+    }
+    .btn-back {
+      display: block;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #7d7fff, #9a7fff);
+      color: white;
+      border: none;
+      padding: 14px 36px;
+      border-radius: 32px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      text-align: center;
+      width: max-content;
+      box-shadow: 0 6px 20px rgba(125,127,255,0.6);
+      transition: background 0.3s ease, transform 0.3s ease;
+      user-select: none;
+    }
+    .btn-back:hover, .btn-back:focus-visible {
+      background: linear-gradient(135deg, #a49fff, #b79fff);
+      outline: none;
+      transform: translateY(-4px) scale(1.05);
+    }
+    footer {
+      background: #131833;
+      color: #777ba0;
+      padding: 40px 15px;
+      text-align: center;
+      font-size: 0.875rem;
+      user-select: none;
+      border-top: 1px solid #222640;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header role="banner" aria-label="Primary navigation header">
+    <a href="index.html" class="logo" aria-label="Moonbix homepage">MOONBIX</a>
+    <nav role="navigation" aria-label="Main menu">
+      <a href="index.html" tabindex="0">Home</a>
+      <a href="artist.html" tabindex="0">Artists</a>
+      <a href="tickets.html" tabindex="0">Tickets</a>
+      <a href="schedule.html" tabindex="0">Schedule</a>
+      <a href="contact.html" tabindex="0">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container-md" tabindex="0">
+    <img src="billie.jpg" alt="Billie Eilish portrait" class="profile-img" />
+    <h1>Billie Eilish</h1>
+    <h2>Pop / Alternative</h2>
+    <p class="bio">
+      Billie Eilish Pirate Baird O'Connell is a Grammy-winning American singer and songwriter known for her distinctive vocal style and dark, genre-defying music.
+      She first gained public attention with her 2015 hit "Ocean Eyes". Billie has quickly become a defining voice of her generation,
+      winning multiple Grammys including Album of the Year, and is celebrated for her unique artistry and advocacy.
+    </p>
+    <div class="stats">
+      <div class="stat-item">Grammy Awards: 7</div>
+      <div class="stat-item">Albums Released: 2</div>
+      <div class="stat-item">Plays on Spotify: 30B+</div>
+    </div>
+    <button class="btn btn-back" onclick="window.location.href='artis.html'" aria-label="Back to artist list">Back to Artists</button>
+  </main>
+
+  <footer role="contentinfo">
+    &copy; 2025 Moonbix Festival. All rights reserved.
+  </footer>
+</body>
+</html>
+
